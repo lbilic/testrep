@@ -4,6 +4,7 @@ import os
 import numpy as np
 
 from skimage.io import imsave, imread
+from matplotlib import pyplot as plt
 
 data_path = os.path.join(os.getcwd(), 'dataset')
 
@@ -16,7 +17,7 @@ def create_train_data():
     images = os.listdir(os.path.join(train_data_path, 'images'))
     total = len(images)
 
-    imgs = np.ndarray((total, image_rows, image_cols), dtype=np.uint8)
+    imgs = np.ndarray((total, image_rows, image_cols, 3), dtype=np.uint8)
     imgs_mask = np.ndarray((total, image_rows, image_cols), dtype=np.uint8)
 
     i = 0
@@ -24,8 +25,11 @@ def create_train_data():
     print('Creating training images...')
     print('-'*30)
     for image_name in images:
-        img = imread(os.path.join(train_data_path, 'images', image_name), as_gray=True)
-        img_mask = imread(os.path.join(train_data_path, 'groundtruth', image_name), as_gray=True)
+        img=imread(os.path.join(train_data_path, 'images', image_name))
+        img = imread(os.path.join(train_data_path, 'images', image_name))
+        img_mask = imread(os.path.join(train_data_path, 'groundtruth', image_name))
+        #img = imread(os.path.join(train_data_path, 'images', image_name), as_gray=True)
+        #img_mask = imread(os.path.join(train_data_path, 'groundtruth', image_name), as_gray=True)
 
         img = np.array(img)
         img_mask = np.array(img_mask)
@@ -54,7 +58,7 @@ def create_test_data():
     images = os.listdir(train_data_path)
     total = len(images)
 
-    imgs = np.ndarray((total, 608, 608), dtype=np.uint8)
+    imgs = np.ndarray((total, 608, 608, 3), dtype=np.uint8)
     imgs_id = np.ndarray((total, ), dtype=np.int32)
 
     i = 0
@@ -63,7 +67,8 @@ def create_test_data():
     print('-'*30)
     for image_name in images:
         img_id = int(image_name.split('.')[0].split('_')[1])
-        img = imread(os.path.join(train_data_path, image_name), as_gray=True)
+        img = imread(os.path.join(train_data_path, image_name))
+        #img = imread(os.path.join(train_data_path, image_name), as_gray=True)
 
         img = np.array(img)
 
