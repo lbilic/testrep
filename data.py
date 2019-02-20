@@ -27,8 +27,8 @@ def create_train_data():
         img = imread(os.path.join(train_data_path, 'images', image_name), as_gray=True)
         img_mask = imread(os.path.join(train_data_path, 'groundtruth', image_name), as_gray=True)
 
-        img = np.array([img])
-        img_mask = np.array([img_mask])
+        img = np.array(img)
+        img_mask = np.array(img_mask)
 
         imgs[i] = img
         imgs_mask[i] = img_mask
@@ -65,7 +65,7 @@ def create_test_data():
         img_id = int(image_name.split('.')[0].split('_')[1])
         img = imread(os.path.join(train_data_path, image_name), as_gray=True)
 
-        img = np.array([img])
+        img = np.array(img)
 
         imgs[i] = img
         imgs_id[i] = img_id
