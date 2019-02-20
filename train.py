@@ -13,7 +13,7 @@ from keras import backend as K
 from data import load_train_data, load_test_data
 from model import unet
 
-K.set_image_data_format('channels_last')  # TF dimension ordering in this code
+K.set_image_data_format('channels_first')  # TF dimension ordering in this code
 
 smooth = 1.
 
@@ -65,7 +65,7 @@ def train_and_predict():
     print('-'*30)
     print('Fitting model...')
     print('-'*30)
-    model.fit(imgs_train, imgs_mask_train, batch_size=32, nb_epoch=20, verbose=1, shuffle=True,
+    model.fit(imgs_train, imgs_mask_train, batch_size=80, nb_epoch=20, verbose=1, shuffle=True,
               validation_split=0.2,
               callbacks=[model_checkpoint])
 
