@@ -13,7 +13,7 @@ from keras import backend as K
 from data import load_train_data, load_test_data
 from model import unet
 
-K.set_image_data_format('channels_first')  # TF dimension ordering in this code
+K.set_image_data_format('channels_last')  # TF dimension ordering in this code
 
 smooth = 1.
 
