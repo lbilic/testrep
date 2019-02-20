@@ -29,9 +29,9 @@ def dice_coef_loss(y_true, y_pred):
     return -dice_coef(y_true, y_pred)
 
 def preprocess(imgs):
-    imgs_p = np.ndarray((imgs.shape[0], 256, 256, 3), dtype=np.uint8)
+    imgs_p = np.ndarray((imgs.shape[0], 256, 256), dtype=np.uint8)
     for i in range(imgs.shape[0]):
-        imgs_p[i] = resize(imgs[i], (256, 256, 3), preserve_range=True)
+        imgs_p[i] = resize(imgs[i], (256, 256), preserve_range=True)
 
     imgs_p = imgs_p[..., np.newaxis]
     return imgs_p
@@ -65,7 +65,7 @@ def train_and_predict():
     print('-'*30)
     print('Fitting model...')
     print('-'*30)
-    model.fit(imgs_train[:, :], imgs_mask_train[:, :], batch_size=80, nb_epoch=20, verbose=1, shuffle=True,
+    model.fit(imgs_train, imgs_mask_train, batch_size=80, nb_epoch=20, verbose=1, shuffle=True,
               validation_split=0.2,
               callbacks=[model_checkpoint])
 
